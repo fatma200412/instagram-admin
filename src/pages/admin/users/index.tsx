@@ -15,6 +15,7 @@ const columns: GridColDef[] = [
     type: "boolean",
     width: 90,
   },
+  { field: "delete", headerName: "Delete", width: 70 },
 ];
 
 type Props = {};
@@ -45,7 +46,7 @@ function Users({}: Props) {
       <Grid container>
         <Dashboard />
         <Grid item xs={4} style={{ margin: "0 auto" }}>
-          <div style={{ height: "100vh", width: "100%" }}>
+          <div style={{ height: "100vh", minWidth: "600px" }}>
             <DataGrid
               rows={users}
               columns={columns}

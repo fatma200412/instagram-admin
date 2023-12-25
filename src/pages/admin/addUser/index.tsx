@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import Dashboard from "../dashboard";
 import { ChangeEvent, useCallback } from "react";
+import { uuid } from "uuidv4";
 
 type Props = {};
 
@@ -52,12 +53,9 @@ function AddUser({}: Props) {
     setIsPublic(false);
   };
 
-  const handleIsPublic = useCallback(
-    (changeEvent: ChangeEvent, checked: boolean): void => {
-      setIsPublic(checked);
-    },
-    []
-  );
+  const handleIsPublic = (e: ChangeEvent<HTMLInputElement>) => {
+    setIsPublic(e.target.checked);
+  };
 
   return (
     <>
@@ -65,7 +63,7 @@ function AddUser({}: Props) {
         <Dashboard />
 
         <Grid item xs={4} style={{ margin: "0 auto" }}>
-          <form action="">
+          <form action="" onSubmit={handleFromSubmit}>
             <div
               style={{
                 display: "flex",
@@ -124,14 +122,17 @@ function AddUser({}: Props) {
               <label htmlFor="">Is Public?</label>
               <input
                 type="checkbox"
+                checked={isPublic}
                 style={{
                   height: "60px",
                   fontSize: "22px",
                   color: "black",
                 }}
+                onChange={handleIsPublic}
               />
 
               <button
+                type="submit"
                 style={{
                   backgroundColor: "#ffafcc",
                   color: "black ",
