@@ -1,9 +1,17 @@
 import React from "react";
 import { DataGrid, GridColDef, GridValueGetterParams } from "@mui/x-data-grid";
 import { useState, useEffect } from "react";
-import { User, getUsers } from "./../../../redux/slices/userSlice";
+import {
+  User,
+  getUsers,
+  getDeleteUsers,
+} from "./../../../redux/slices/userSlice";
 import { Grid } from "@mui/material";
 import Dashboard from "../dashboard";
+import Button from "@mui/material/Button";
+import { useDispatch } from "react-redux";
+
+// const dispatch = useDispatch();
 
 const columns: GridColDef[] = [
   { field: "id", headerName: "ID", width: 70 },
@@ -15,7 +23,22 @@ const columns: GridColDef[] = [
     type: "boolean",
     width: 90,
   },
-  { field: "delete", headerName: "Delete", width: 70 },
+  {
+    field: "delete",
+    headerName: "Delete",
+    width: 70,
+    renderCell: (params) => {
+      <Button
+        variant="outlined"
+        color="error"
+        onClick={() => {
+          let userId = params.row.id;
+        }}
+      >
+        DELETE
+      </Button>;
+    },
+  },
 ];
 
 type Props = {};
